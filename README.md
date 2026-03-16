@@ -114,20 +114,6 @@ The application contains a modern homepage with navigation for different product
 * Laptop
 * About
 
----
-
-## 📸 UI Preview
-
-*(You can add screenshots here)*
-
-Example:
-
-```
-<img width="1919" height="950" alt="Chat Application UI" src="https://github.com/user-attachments/assets/aef9e817-7253-408a-a924-24de99f88748" />
-```
-
----
-
 ## 👨‍💻 Developer
 
 **Sahan Geesara**
