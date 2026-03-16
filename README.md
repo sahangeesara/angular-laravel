@@ -69,7 +69,7 @@ Online Store
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git
+https://github.com/sahangeesara/angular-laravel.git
 ```
 
 ---
