@@ -123,7 +123,7 @@ The application contains a modern homepage with navigation for different product
 Example:
 
 ```
-v<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/aef9e817-7253-408a-a924-24de99f88748" />
+<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/aef9e817-7253-408a-a924-24de99f88748" />
 
 ```
 
