@@ -1,93 +1,102 @@
 <div class="page-wrap section-space">
   <div class="row profile-grid">
-    <div class="padding col-md-5">
-      <mat-card class="example-card2 profile-card">
-        <mat-card-header class="profile-header">
-          <mat-card-title>Search Form</mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="profile-content">
-
-          <form #searchForm=ngForm [formGroup]="searchsForm" >
-            <mat-form-field appearance="outline">
-              <mat-label>Enter Search Nic</mat-label>
-              <input type="text" matInput  name="nic"  formControlName="searchnic" required>
-            </mat-form-field>
-            <mat-card-actions class="profile-actions" type="button">
-              <button type="submit" mat-button mat-raised-button (click)="search()" color="warn" [disabled]="!searchForm.valid">Search</button>&nbsp;
-              <button mat-button mat-raised-button color="accent" type="reset" style="float: right">Search Clear</button>
-            </mat-card-actions>
-          </form>
-        </mat-card-content>
-      </mat-card>
-    </div>
     <div class="padding col-md-7">
-      <mat-card class="example-card profile-card">
-        <mat-card-header class="profile-header">
-          <mat-card-title>Register Form</mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="profile-content">
-          <form #accountForm=ngForm (ngSubmit)="onSubmit()"  [formGroup]="accountsForm" >
-            <br>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Enter your First Name</mat-label>
-              <input type="text" matInput  name="firstname"   formControlName="firstname"   required>
-            </mat-form-field>
-            &nbsp;
-
-            <mat-form-field appearance="outline">
-              <mat-label>Enter your Last Name</mat-label>
-              <input type="text" matInput  name="lastname"  formControlName="lastname"  required>
-            </mat-form-field>
-            <br>
-            <mat-form-field appearance="outline">
-              <mat-label>Enter your Age</mat-label>
-              <input type="text" matInput  name="age" formControlName="age" required>
-            </mat-form-field>
-            &nbsp;
-            <mat-form-field appearance="outline">
-              <mat-label>Enter your Phone Number</mat-label>
-              <input type="text" matInput  name="number"   formControlName="number" required>
-            </mat-form-field>
-            <br>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Enter your Address</mat-label>
-              <input type="text" matInput  name="address"  formControlName="address" required>
-            </mat-form-field>
-            &nbsp;
-            <mat-form-field appearance="outline">
-              <mat-label>Enter your Nic</mat-label>
-              <input type="text" matInput  name="nic" formControlName="nic" required>
-            </mat-form-field>
-
-            <br>
-            <mat-form-field appearance="outline">
-              <mat-label>Enter your Email</mat-label>
-              <input type="email" matInput  name="email" formControlName="email"  required>
-            </mat-form-field>&nbsp;
-                  <div id="imgpanel" class="example-form-field">
-                    <img [src]="imageUrl" alt="Profile preview">
-                    <input id="userImage" hidden="hidden" (change)="selectImage($event)" type="file" formControlName="image" required>
-                    <label for="userImage" id="selectbutton">Select</label>
-                  </div>
-            <mat-card-actions class="profile-actions" type="button">
-              <button id="btnSubmit" type="submit" mat-button mat-raised-button color="primary" [disabled]="!accountForm.valid">Submit</button>&nbsp;&nbsp;&nbsp;
-              <button id="btnUpdate" mat-button mat-raised-button color="accent" type="button" [disabled]="!accountForm.valid" (click)="update()">Update</button>&nbsp;
-              <button id="btnDelete" mat-button mat-raised-button color="warn" type="button" [disabled]="!accountForm.valid" (click)="delete()">Delete</button>&nbsp;
-              <button mat-button mat-raised-button color="accent" (click)="clearForm()" style="float: right">Clear</button>
-            </mat-card-actions>
-          </form>
-        </mat-card-content>
-      </mat-card>
-
-      <div *ngIf="isSystemUser" style="margin-top: 20px;">
-        <app-item-form></app-item-form>
-        <app-item-table></app-item-table>
+      <!-- Show button if not showing details yet -->
+      <div *ngIf="!showDetails">
+        <button mat-raised-button color="primary" (click)="onViewDetailsClick()" style="margin-bottom: 20px;">View/Add Account Details</button>
       </div>
-
+      <!-- Show details and form only after button click -->
+      <div *ngIf="showDetails">
+        <!-- Profile summary view (read-only) -->
+        <mat-card *ngIf="!isEditMode" class="example-card profile-card">
+          <mat-card-header class="profile-header">
+            <mat-card-title>Account Details</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="profile-content">
+            <table class="profile-summary-table">
+              <tr><td><b>First Name:</b></td><td>{{ accountsForm.value.firstname }}</td></tr>
+              <tr><td><b>Last Name:</b></td><td>{{ accountsForm.value.lastname }}</td></tr>
+              <tr><td><b>Age:</b></td><td>{{ accountsForm.value.age }}</td></tr>
+              <tr><td><b>Phone Number:</b></td><td>{{ accountsForm.value.number }}</td></tr>
+              <tr><td><b>Address:</b></td><td>{{ accountsForm.value.address }}</td></tr>
+              <tr><td><b>NIC:</b></td><td>{{ accountsForm.value.nic }}</td></tr>
+              <tr><td><b>Email:</b></td><td>{{ accountsForm.value.email }}</td></tr>
+            </table>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button mat-raised-button color="accent" (click)="enableEdit()">Update</button>
+          </mat-card-actions>
+        </mat-card>
+        <!-- Profile edit form (edit mode) -->
+        <mat-card *ngIf="isEditMode" class="example-card profile-card">
+          <mat-card-header class="profile-header">
+            <mat-card-title>Edit Account Details</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="profile-content">
+            <form #accountForm=ngForm (ngSubmit)="onSubmit()"  [formGroup]="accountsForm" >
+              <br>
+               <mat-form-field appearance="outline">
+                 <mat-label>First Name</mat-label>
+                 <input type="text" matInput name="firstname" formControlName="firstname" required>
+               </mat-form-field>
+              &nbsp;
+               <mat-form-field appearance="outline">
+                 <mat-label>Last Name</mat-label>
+                 <input type="text" matInput name="lastname" formControlName="lastname" required>
+               </mat-form-field>
+              <br>
+               <mat-form-field appearance="outline">
+                 <mat-label>Age</mat-label>
+                 <input type="text" matInput name="age" formControlName="age" required>
+               </mat-form-field>
+              &nbsp;
+               <mat-form-field appearance="outline">
+                 <mat-label>Phone Number</mat-label>
+                 <input type="text" matInput name="number" formControlName="number" required>
+               </mat-form-field>
+              <br>
+               <mat-form-field appearance="outline">
+                 <mat-label>Address</mat-label>
+                 <input type="text" matInput name="address" formControlName="address" required>
+               </mat-form-field>
+              &nbsp;
+               <mat-form-field appearance="outline">
+                 <mat-label>NIC</mat-label>
+                 <input type="text" matInput name="nic" formControlName="nic" required>
+               </mat-form-field>
+              <br>
+                <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput name="email" formControlName="email" required readonly>
+                </mat-form-field>
+               <mat-card-actions class="profile-actions" type="button">
+                 <button id="btnSubmit" type="submit" mat-button mat-raised-button color="primary" [disabled]="!accountsForm.valid">Save</button>&nbsp;&nbsp;&nbsp;
+                 <button mat-button mat-raised-button color="accent" (click)="cancelEdit()" style="float: right">Cancel</button>
+              </mat-card-actions>
+            </form>
+          </mat-card-content>
+        </mat-card>
+        <!-- Item add section: only for system users or admin, only after profile form is valid and not in edit mode -->
+        <div *ngIf="accountsForm.valid && (isSystemUser || isAdminUser) && !isEditMode" style="margin-top: 32px;">
+          <mat-card class="example-card profile-card">
+            <mat-card-header>
+              <mat-card-title>Add Item</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <app-item-form></app-item-form>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="example-card profile-card" style="margin-top: 16px;">
+            <mat-card-header>
+              <mat-card-title>Your Items</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <app-item-table></app-item-table>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
     </div>
-
   </div>
 
 </div>

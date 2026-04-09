@@ -12,7 +12,7 @@ use App\Http\Controllers\AjaxContactController;
 use App\Http\Controllers\SystemController;
 Route::group([
 
-    'middleware' => 'api',
+        'middleware' => 'api',
 
 ], function ($router) {
 
@@ -48,6 +48,15 @@ Route::group([
     });
 
     Route::middleware('auth:api')->get('system/me', [SystemController::class, 'getByUserEmail']);
+
+    // Get system user by email (public or protected as needed)
+    Route::get('system/by-email/{email}', function($email) {
+        $system = \App\Models\System::findByEmail($email);
+        if (!$system) {
+            return response()->json(['message' => 'No system record found for this email'], 404);
+        }
+        return response()->json($system);
+    });
 
 //    Route::get('ajax-form', [AjaxContactController::class, 'index']);
 

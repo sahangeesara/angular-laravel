@@ -14,7 +14,7 @@ class System extends Model
 {
 
     protected $connection = 'mysql_second';
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -37,4 +37,13 @@ class System extends Model
     {
         return $this->attributes['image_url'] = url(Storage::url($this->image));
     }
+
+    /**
+     * Get a system user by email.
+     */
+    public static function findByEmail($email)
+    {
+        return self::whereRaw('LOWER(email) = ?', [strtolower(trim($email))])->first();
+    }
 }
+

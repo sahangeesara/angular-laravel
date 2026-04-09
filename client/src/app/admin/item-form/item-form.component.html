@@ -1,24 +1,34 @@
-<form [formGroup]="itemForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="item-form">
-  <div>
-    <label>Item Name</label>
-    <input formControlName="itemname" type="text" required />
-  </div>
-  <div>
-    <label>Item Price</label>
-    <input formControlName="itemprice" type="number" required />
-  </div>
-  <div>
-    <label>Item Code</label>
-    <input formControlName="itemcode" type="text" required />
-  </div>
-  <div>
-    <label>Description</label>
-    <textarea formControlName="description"></textarea>
-  </div>
-  <div>
-    <label>Image</label>
-    <input type="file" (change)="onFileChange($event)" />
-  </div>
-  <button type="submit">Add Item</button>
-</form>
-
+<!-- Add New Item Section -->
+<mat-card class="item-form-card" style="margin-bottom: 24px;">
+  <mat-card-title>Add New Item</mat-card-title>
+  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="item-form">
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Item Name</mat-label>
+        <input matInput formControlName="itemname" type="text" required />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Item Price</mat-label>
+        <input matInput formControlName="itemprice" type="number" required />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Item Code</mat-label>
+        <input matInput formControlName="itemcode" type="text" required />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="form-actions" style="margin-top: 16px;">
+      <button mat-raised-button color="primary" type="submit">Add Item</button>
+      <button mat-button type="button" (click)="onClear()" style="margin-left: 8px;">Clear</button>
+    </div>
+  </form>
+</mat-card>

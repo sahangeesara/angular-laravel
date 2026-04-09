@@ -26,4 +26,8 @@ export class ItemApiService {
     // 3. Match your Laravel route (e.g., /api/items/5 or /api/items?id=5)
     return this.http.get<Item>(`${this.apiUrl}/${id}`);
   }
+
+  deleteItem(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/items/${id}`);
+  }
 }

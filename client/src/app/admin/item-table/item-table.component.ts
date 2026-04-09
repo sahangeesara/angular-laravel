@@ -31,5 +31,26 @@ export class ItemTableComponent implements OnInit {
       }
     });
   }
-}
 
+  editItem(item: Item) {
+    // TODO: Implement edit logic (e.g., open dialog or emit event)
+    alert('Edit feature coming soon!');
+  }
+
+  deleteItem(item: Item) {
+    if (item.id != null) {
+      if (confirm(`Are you sure you want to delete item "${item.itemname}"?`)) {
+        this.itemApi.deleteItem(item.id).subscribe({
+          next: () => {
+            this.items = this.items.filter(i => i.id !== item.id);
+          },
+          error: () => {
+            alert('Failed to delete item.');
+          }
+        });
+      }
+    } else {
+      alert('Invalid item ID.');
+    }
+  }
+}

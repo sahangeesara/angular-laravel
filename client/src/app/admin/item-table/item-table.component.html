@@ -1,27 +1,37 @@
-<div *ngIf="loading">Loading items...</div>
-<div *ngIf="error">{{ error }}</div>
-<table *ngIf="!loading && !error">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Code</th>
-      <th>Description</th>
-      <th>Image</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of items">
-      <td>{{ item.id }}</td>
-      <td>{{ item.itemname }}</td>
-      <td>{{ item.itemprice }}</td>
-      <td>{{ item.itemcode }}</td>
-      <td>{{ item.description }}</td>
-      <td>
-        <img *ngIf="item.image" [src]="item.image" alt="item image" width="60" />
-      </td>
-    </tr>
-  </tbody>
-</table>
+<mat-card class="item-table-card">
+  <mat-card-title>Item List</mat-card-title>
+  <div *ngIf="loading">Loading items...</div>
+  <div *ngIf="error">{{ error }}</div>
+  <table mat-table *ngIf="!loading && !error && items.length > 0" class="mat-elevation-z1" style="width: 100%; margin-top: 12px;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items; let i = index" [ngClass]="{ 'alt-row': i % 2 === 1 }">
+        <td>{{ item.id }}</td>
+        <td>{{ item.itemname }}</td>
+        <td>{{ item.itemprice }}</td>
+        <td>{{ item.itemcode }}</td>
+        <td>{{ item.description }}</td>
+        <td>
+          <button mat-icon-button color="primary" (click)="editItem(item)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="deleteItem(item)"><mat-icon>delete</mat-icon></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!loading && !error && items.length === 0" style="margin-top: 16px; text-align: center; color: #888;">
+    No items found.
+  </div>
+</mat-card>
 
+<style>
+  .alt-row { background: #f5f5f5; }
+</style>

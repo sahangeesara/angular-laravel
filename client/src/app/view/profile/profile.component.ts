@@ -6,6 +6,7 @@ import {System} from "../../entities/system";
 import {DialogComponent} from "../dialog/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import { TokenService } from '../../Services/token.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -13,22 +14,21 @@ import { TokenService } from '../../Services/token.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
-
   formData = new FormData();
-  imageUrl?: string = 'assets/default.png';
   file?: any;
   id?: any = null;
   isSystemUser: boolean = false;
+  isAdminUser: boolean = false;
+  showDetails: boolean = false; // Controls visibility of details/form
+  isProfileFilled: boolean = false;
+  isEditMode: boolean = false;
+  lastProfileData: any = null;
 
   accountsForm = new FormGroup({
     firstname: new FormControl(
       // "", [Validators.required,]
     ),
     lastname: new FormControl(
-      // "", [Validators.required,]
-    ),
-    image: new FormControl(
       // "", [Validators.required,]
     ),
     age: new FormControl(
@@ -57,10 +57,6 @@ export class ProfileComponent implements OnInit {
     return this.accountsForm.controls.lastname as FormControl;
   }
 
-
-  get imageField(): FormControl {
-    return this.accountsForm.controls.image as FormControl;
-  }
 
   get ageField(): FormControl {
     return this.accountsForm.controls.age as FormControl;
@@ -106,44 +102,129 @@ export class ProfileComponent implements OnInit {
 
 
   async ngOnInit() {
-
-    const btnUp =  document.getElementById('btnUpdate')  as HTMLInputElement;
-    btnUp.disabled  = true;
-
-    const btnDele =  document.getElementById('btnDelete')  as HTMLInputElement;
-    btnDele.disabled  = true;
-
-    const btnSub =  document.getElementById('btnSubmit')  as HTMLInputElement;
-    btnSub.disabled  = false;
-
     this.isSystemUser = this.tokenService.isSystemUser();
-
-    // Get email from JWT
     const token = this.tokenService.get();
-    let email = '';
     if (token) {
       const payload = this.tokenService.payload(token);
-      email = payload?.email || '';
-    }
-    if (email) {
-      // Fetch system user details by email
-      try {
-        const data = await this.Jarvis.getSystemByEmail(email).toPromise();
-        if (data) {
-          // Fill the form fields with the fetched data
-          this.firstnameField.setValue(data.firstname || '');
-          this.lastnameField.setValue(data.lastname || '');
-          this.emailField.setValue(data.email || '');
-          this.numberField.setValue(data.number || '');
-          this.nicField.setValue(data.nic || '');
-          this.ageField.setValue(data.age || '');
-          this.addressField.setValue(data.address || '');
-          this.imageUrl = data.image_url || 'assets/default.png';
-        }
-      } catch (e) {
-        // handle error (e.g., user not found)
+      console.log('JWT payload:', payload); // Debug: print payload
+      // Admin detection: check for customer_type === 'admin'
+      if (payload && payload.customer_type === 'admin') {
+        this.isAdminUser = true;
+        console.log('isAdminUser set to TRUE (customer_type)');
+      } else {
+        this.isAdminUser = false;
+        console.log('isAdminUser set to FALSE');
       }
     }
+
+    // Get email from JWT
+    const payload = this.tokenService.payload(token);
+    const email = payload?.email || '';
+  }
+
+  private normalizeSystemUserResponse(data: any): any {
+    if (Array.isArray(data)) {
+      return data[0];
+    } else if (data && typeof data === 'object') {
+      if (data.system) return data.system;
+      if (data.data) return data.data;
+      return data;
+    }
+    return null;
+  }
+
+  private mapSystemUser(user: any): any {
+    if (!user) return null;
+    return {
+      firstname: user.firstname || user.first_name || '',
+      lastname: user.lastname || user.last_name || '',
+      email: user.email || '',
+      number: user.number || user.phone || '',
+      nic: user.nic || '',
+      age: user.age || '',
+      address: user.address || '',
+    };
+  }
+
+  async onViewDetailsClick() {
+    this.showDetails = true;
+    this.isEditMode = false; // Form is readonly after loading
+    console.log('Fetching account details...');
+
+    // 2. Get the token and decode the payload
+    const token = this.tokenService.get();
+    if (!token) {
+      Swal.fire('Error', 'Session expired. Please log in again.', 'error');
+      return;
+    }
+
+    const payload = this.tokenService.payload(token);
+    console.log('Decoded JWT payload:', payload);
+
+    // 3. Extract email (This works because of your getJWTCustomClaims update)
+    const email = payload?.email;
+
+    if (!email) {
+      // If you still see this alert, you MUST logout and login again to refresh the token
+      Swal.fire({
+        icon: 'warning',
+        title: 'Token Outdated',
+        text: 'Email not found in current session. Please log out and log back in to refresh your security token.',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    try {
+      // 4. Fetch data from Laravel using JarwisService
+      // Using toPromise() as in your original snippet, or convert to lastValueFrom(obs) for newer Angular
+      const data = await this.Jarvis.getSystemByEmail(email).toPromise();
+      console.log('API response:', data);
+
+      // 5. Normalize and Map the data
+      const userRaw = this.normalizeSystemUserResponse(data);
+      const user = this.mapSystemUser(userRaw);
+
+      if (user && (user.firstname || user.email)) {
+        // 6. Fill the form fields safely using patchValue
+        this.accountsForm.patchValue({
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email,
+          number: user.number,
+          nic: user.nic,
+          age: user.age,
+          address: user.address
+        });
+
+        this.lastProfileData = { ...user }; // Save last loaded profile
+
+        // Store the database ID for updates
+        this.id = userRaw.id;
+        this.isProfileFilled = true;
+        this.isEditMode = false; // Ensure readonly after load
+
+        console.log('Form successfully populated for:', user.email);
+      } else {
+        // If the email is in JWT but not in the 'systems' table yet
+        Swal.fire('Information', 'No profile records found. Please fill in your details and Submit.', 'info');
+        this.emailField.setValue(email); // Pre-fill email so they can register
+        this.isProfileFilled = false;
+        this.isEditMode = true; // Allow editing for new profile
+        this.lastProfileData = null;
+      }
+    } catch (error) {
+      console.error('Error fetching system user:', error);
+      Swal.fire('Error', 'Failed to retrieve profile data from the server.', 'error');
+      this.isProfileFilled = false;
+      this.isEditMode = true; // Allow editing if error
+      this.lastProfileData = null;
+    }
+  }
+
+  // Update Method: enable edit mode
+  enableEdit() {
+    this.isEditMode = true;
   }
 
   //Data submit method
@@ -164,7 +245,7 @@ export class ProfileComponent implements OnInit {
         system.age = this.ageField.value;
         system.address = this.addressField.value;
 
-        this.formData.append('image', this.file, this.file.name);
+
         this.formData.append('form', JSON.stringify(system));
 
 
@@ -178,8 +259,10 @@ export class ProfileComponent implements OnInit {
 
             // @ts-ignore
             let systems = this.Jarvis.saveData(this.formData);
-             this.clearForm();
-            // this.navigate();
+            this.clearForm();
+            this.isProfileFilled = true;
+            this.isEditMode = false; // Back to readonly after submit
+            this.lastProfileData = { ...this.accountsForm.value }; // Save after submit
           } else {
             console.log("No Action")
           }
@@ -217,7 +300,7 @@ export class ProfileComponent implements OnInit {
 
 
 
-        this.formData.append('image', this.file, this.file.name);
+
         this.formData.append('form', JSON.stringify(system));
 
 
@@ -287,7 +370,6 @@ export class ProfileComponent implements OnInit {
     this.numberField.setValue(data[0].number);
     this.ageField.setValue(data[0].age);
     this.addressField.setValue(data[0].address);
-    this.imageUrl =data[0].image_url
 
 
 
@@ -297,7 +379,6 @@ export class ProfileComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
   clearForm(): void {
-    this.imageUrl = 'assets/default.png';
     this.ageField.setValue("");
     this.numberField.setValue("");
     this.lastnameField.setValue("");
@@ -305,23 +386,13 @@ export class ProfileComponent implements OnInit {
     this.emailField.setValue("");
     this.addressField.setValue("");
     this.nicField.setValue("");
-
+    this.isEditMode = false; // Back to readonly after clear
   }
 
-  selectImage(e: any): void {
-    this.file = e.target.files ? e.target.files[0] : '';
-    if (this.file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(this.file);
-      reader.onload = () => {
-        this.imageUrl = reader.result as string;
-
-      };
+  cancelEdit(): void {
+    if (this.lastProfileData) {
+      this.accountsForm.patchValue(this.lastProfileData);
     }
-
+    this.isEditMode = false;
   }
-
-
-
 }
-

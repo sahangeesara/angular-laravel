@@ -70,10 +70,16 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [
-            'is_customer' => (bool) $this->is_customer,
-            'customer_type' => $this->customer_type,
+        // Defensive: always use the current value from the database
+        $email = $this->getOriginal('email') ?? $this->email;
+        $claims = [
+            'email' => strtolower(trim($email)),
+            'is_customer' => $this->is_customer,
         ];
+        if (!empty($this->customer_type)) {
+            $claims['customer_type'] = $this->customer_type;
+        }
+        return $claims;
     }
     public function setPasswordAttribute($value){
         $this->attributes['password'] = bcrypt($value);

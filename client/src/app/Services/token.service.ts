@@ -51,7 +51,7 @@ export class TokenService {
     if (token) {
       const payload = this.payload(token);
       // Adjust the property name below to match your backend JWT payload (e.g., 'role', 'type', etc.)
-      return payload && payload.role ? payload.role : null;
+      return payload && payload.customer_type ? payload.customer_type : null;
     }
     return null;
   }
