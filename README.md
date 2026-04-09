@@ -114,20 +114,6 @@ The application contains a modern homepage with navigation for different product
 * Laptop
 * About
 
----
-
-## 📸 UI Preview
-
-*(You can add screenshots here)*
-
-Example:
-
-```
-![Homepage Screenshot](screenshot.png)
-```
-
----
-
 ## 👨‍💻 Developer
 
 **Sahan Geesara**
