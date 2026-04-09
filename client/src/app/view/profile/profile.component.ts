@@ -5,6 +5,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {System} from "../../entities/system";
 import {DialogComponent} from "../dialog/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import { TokenService } from '../../Services/token.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +19,7 @@ export class ProfileComponent implements OnInit {
   imageUrl?: string = 'assets/default.png';
   file?: any;
   id?: any = null;
+  isSystemUser: boolean = false;
 
   accountsForm = new FormGroup({
     firstname: new FormControl(
@@ -97,12 +99,13 @@ export class ProfileComponent implements OnInit {
 
   constructor(private Jarvis: JarwisService,
               private router: Router,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              private tokenService: TokenService
   ) {
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
 
     const btnUp =  document.getElementById('btnUpdate')  as HTMLInputElement;
     btnUp.disabled  = true;
@@ -112,6 +115,35 @@ export class ProfileComponent implements OnInit {
 
     const btnSub =  document.getElementById('btnSubmit')  as HTMLInputElement;
     btnSub.disabled  = false;
+
+    this.isSystemUser = this.tokenService.isSystemUser();
+
+    // Get email from JWT
+    const token = this.tokenService.get();
+    let email = '';
+    if (token) {
+      const payload = this.tokenService.payload(token);
+      email = payload?.email || '';
+    }
+    if (email) {
+      // Fetch system user details by email
+      try {
+        const data = await this.Jarvis.getSystemByEmail(email).toPromise();
+        if (data) {
+          // Fill the form fields with the fetched data
+          this.firstnameField.setValue(data.firstname || '');
+          this.lastnameField.setValue(data.lastname || '');
+          this.emailField.setValue(data.email || '');
+          this.numberField.setValue(data.number || '');
+          this.nicField.setValue(data.nic || '');
+          this.ageField.setValue(data.age || '');
+          this.addressField.setValue(data.address || '');
+          this.imageUrl = data.image_url || 'assets/default.png';
+        }
+      } catch (e) {
+        // handle error (e.g., user not found)
+      }
+    }
   }
 
   //Data submit method
@@ -292,7 +324,4 @@ export class ProfileComponent implements OnInit {
 
 
 }
-
-
-
 

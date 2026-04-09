@@ -1,0 +1,117 @@
+<div class="item-detail-page">
+  <div class="detail-container">
+    <!-- Header with back button -->
+    <div class="detail-header">
+      <button class="back-btn" (click)="goBack()" title="Go back">
+        <span>&larr;</span> Back
+      </button>
+      <div class="breadcrumb">
+        <span>{{ product.category | titlecase }}</span>
+        <span>/</span>
+        <span>{{ product.name }}</span>
+      </div>
+    </div>
+
+    <!-- Main product grid -->
+    <div class="detail-grid">
+      <!-- Left: Product image and gallery -->
+      <div class="product-gallery">
+        <div class="main-image">
+          <img [src]="product.image" [alt]="product.name" />
+        </div>
+        <div class="image-thumbnails">
+          <img [src]="product.image" alt="View 1" class="active" />
+          <img [src]="product.image" alt="View 2" />
+          <img [src]="product.image" alt="View 3" />
+          <img [src]="product.image" alt="View 4" />
+        </div>
+      </div>
+
+      <!-- Right: Product info and add-to-cart -->
+      <div class="product-info">
+        <!-- Rating -->
+        <div class="rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-text">({{ product.reviews }} reviews)</span>
+        </div>
+
+        <!-- Title and price -->
+        <h1 class="product-title">{{ product.name }}</h1>
+        <div class="price-section">
+          <span class="price">Rs.{{ product.price | number }}</span>
+          <span class="stock" [class.in-stock]="product.inStock">
+            {{ product.inStock ? '✓ In Stock' : 'Out of Stock' }}
+          </span>
+        </div>
+
+        <!-- Description -->
+        <p class="description">{{ product.description }}</p>
+
+        <!-- Specifications -->
+        <div class="specs">
+          <h3>Key Specifications</h3>
+          <div class="spec-grid">
+            <div class="spec-item" *ngFor="let spec of product.specs">
+              <span class="spec-label">{{ spec.label }}</span>
+              <span class="spec-value">{{ spec.value }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Color selector -->
+        <div class="options">
+          <h3>Color</h3>
+          <div class="color-options">
+            <button
+              *ngFor="let color of product.colors"
+              class="color-btn"
+              [title]="color"
+              [class.active]="color === product.colors[0]">
+              {{ color.charAt(0) }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Warranty info -->
+        <div class="warranty-box">
+          <span class="warranty-label">📋 Warranty:</span>
+          <span>{{ product.warranty }}</span>
+        </div>
+
+        <!-- Quantity and Add to Cart -->
+        <div class="cart-section">
+          <div class="quantity-selector">
+            <label for="qty">Quantity:</label>
+            <div class="qty-controls">
+              <button (click)="decreaseQuantity()" class="qty-btn">−</button>
+              <input id="qty" type="number" [(ngModel)]="quantity" min="1" readonly class="qty-input" />
+              <button (click)="increaseQuantity()" class="qty-btn">+</button>
+            </div>
+          </div>
+
+          <button (click)="addToCart()" class="add-to-cart-btn" [disabled]="!product.inStock">
+            <span>🛒</span>
+            {{ product.inStock ? 'Add to Cart' : 'Out of Stock' }}
+          </button>
+        </div>
+
+        <!-- Additional details -->
+        <div class="additional-info">
+          <div class="info-row">
+            <span class="label">🚚 Delivery:</span>
+            <span>Free delivery on orders above Rs.5,000</span>
+          </div>
+          <div class="info-row">
+            <span class="label">↩️ Returns:</span>
+            <span>30-day money-back guarantee</span>
+          </div>
+          <div class="info-row">
+            <span class="label">🔒 Secure:</span>
+            <span>100% secure payment gateway</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

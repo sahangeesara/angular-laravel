@@ -1,86 +1,32 @@
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="assets/laptop/L1.jpg" class="d-block w-100 img2" alt="First slide">
+<div class="page-wrap store-page section-space">
+  <div id="carouselExampleControls" class="carousel slide store-hero" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-inner">
+      <div *ngFor="let img of sliderImages; let i = index" class="carousel-item" [class.active]="i === 0">
+        <img [src]="img" alt="Slider image" width="200" height="100">
+      </div>
     </div>
-    <div class="carousel-item">
-      <img src="assets/laptop/hp1.jpg" class="d-block w-100 img2" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/laptop/del1.jpg" class="d-block w-100 img2" alt="Third slide">
-    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-<!--    <span class="visually-hidden">Previous</span>-->
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-<!--    <span class="visually-hidden">Next</span>-->
-  </button>
-</div>
 
+  <h1 class="page-title">Shop Laptops</h1>
+  <p class="page-subtitle section-intro">Portable machines for study, office, and high-performance gaming.</p>
 
-<div class="container">
-  <div class="row padding">
-    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-      <div class="card">
-        <div class="image"><img src="assets/laptop/hp2.jpg"></div>
-        <span class="title">HP I3 (11th Gen)</span>
-        <span class="price">Rs.187,500.00</span>
+  <div class="store-grid">
+    <article class="store-card" *ngFor="let laptop of laptops">
+      <div class="store-card-image"><img [src]="laptop.image_url || 'assets/placeholder-laptop.jpg'" [alt]="laptop.itemname" width="200" height="100"></div>
+      <span class="store-card-title">{{ laptop.itemname }}</span>
+      <span class="store-card-price">Rs.{{ laptop.itemprice | number }}</span>
+      <div class="card-actions">
+        <button routerLink="/item/{{laptop.id}}" class="preview-btn">Preview</button>
+        <button type="button" class="add-to-cart-quick" [disabled]="!laptop.id" (click)="addToCartQuick(laptop.id)">Add to Cart</button>
       </div>
-    </div>
-    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-      <div class="card ms-md-3">
-        <div class="image"><img src="assets/laptop/del3.png"></div>
-        <span class="title">Dell I3 (11th Gen)</span>
-        <span class="price">Rs.181,000.00</span>
-      </div>
-    </div>
-    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-      <div class="card ms-md-3 my-xs-5">
-        <div class="image"><img src="assets/laptop/asus1.jpg"></div>
-        <span class="title">Asus I3 (11th Gen) </span>
-        <span class="price">Rs.197,670.00</span>
-      </div>
-    </div>
-    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-      <div class="card ms-md-1 my-xs-5">
-        <div class="image"><img src="assets/laptop/msi1.jpg"></div>
-        <span class="title">MSI Pulse GL66 15.6 I7 (11th Gen) </span>
-        <span class="price">Rs. 435,000.00</span>
-      </div>
-    </div>
-    <div class="row padding">
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-        <div class="card my-xs-5">
-          <div class="image"><img src="assets/laptop/hp3.jpg"></div>
-          <span class="title">HP I5 (12th Gen)</span>
-          <span class="price">Rs.269,990.00</span>
-        </div>
-      </div>
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-        <div class="card ms-md-3 my-xs-5">
-          <div class="image"><img src="assets/laptop/del2.png"></div>
-          <span class="title">Dell i5 (12th Gen)</span>
-          <span class="price">Rs.291,500.00</span>
-        </div>
-      </div>
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-        <div class="card ms-md-3 my-xs-5">
-          <div class="image"><img src="assets/laptop/asus2.png"></div>
-          <span class="title">Asus Vivobook 15 (12th Gen) </span>
-          <span class="price">Rs.231,000.00</span>
-        </div>
-      </div>
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-        <div class="card ms-md-3 my-xs-5">
-          <div class="image"><img src="assets/laptop/ms12.jpg"></div>
-          <span class="title">MSI Gaming GL63 8RC 15.6 Inch I7 (8th Gen)</span>
-          <span class="price">Rs. 192000.00</span>
-        </div>
-      </div>
-    </div>
+    </article>
   </div>
 </div>
-

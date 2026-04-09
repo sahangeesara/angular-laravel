@@ -1,18 +1,53 @@
-.example-container mat-form-field + mat-form-field {
-  margin-left: 8px;
+.auth-card {
+  width: min(100%, 460px);
+  margin: 0 auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  overflow: hidden;
+}
 
+.auth-header {
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+  color: #0f172a;
+  padding: 0.9rem 1rem;
 }
-.example-card {
-  max-width: 400px;
 
+.example-container,
+mat-form-field {
+  width: 100%;
 }
-@media (max-width: 1200px) {
-  .example-card {
-    width: 600px;
+
+.form {
+  padding: 1rem;
+}
+
+.error-box {
+  margin-bottom: 0.8rem;
+  border-radius: 8px;
+  background: #dc2626;
+  color: #f8fafc;
+  padding: 0.55rem 0.7rem;
+}
+
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-top: 0.4rem;
+}
+
+.forgot-row {
+  display: block;
+  text-align: right;
+}
+
+.forgot {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+@media (max-width: 575px) {
+  .action-row {
+    flex-direction: column;
   }
 }
-@media (max-width: 992px) {
-  .example-card {
-        width: 500px;
-  }
-  }

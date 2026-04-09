@@ -1,108 +1,90 @@
-<div class="container ">
-  <div class="row">
-    <div class="padding col-md-6">
-      <mat-card class="example-card2">
-        <mat-card-header  style="background-color: mediumaquamarine">
-          <mat-card-title style="margin-left: 110px"> Search Form </mat-card-title>
+<div class="page-wrap section-space">
+  <div class="row profile-grid">
+    <div class="padding col-md-5">
+      <mat-card class="example-card2 profile-card">
+        <mat-card-header class="profile-header">
+          <mat-card-title>Search Form</mat-card-title>
         </mat-card-header>
-        <mat-card-content style="background-color: snow" >
+        <mat-card-content class="profile-content">
 
           <form #searchForm=ngForm [formGroup]="searchsForm" >
             <mat-form-field appearance="outline">
               <mat-label>Enter Search Nic</mat-label>
               <input type="text" matInput  name="nic"  formControlName="searchnic" required>
             </mat-form-field>
-            <mat-card-actions style="background-color: snow"  type="button" >
+            <mat-card-actions class="profile-actions" type="button">
               <button type="submit" mat-button mat-raised-button (click)="search()" color="warn" [disabled]="!searchForm.valid">Search</button>&nbsp;
-              <button mat-button mat-raised-button color="info"  type="reset"  style="float: right">Search Clear</button>
+              <button mat-button mat-raised-button color="accent" type="reset" style="float: right">Search Clear</button>
             </mat-card-actions>
           </form>
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="padding col-md-6">
-      <mat-card class="example-card">
-        <mat-card-header  style="background-color: mediumaquamarine">
-          <mat-card-title style="margin-left: 110px"> Register Form </mat-card-title>
+    <div class="padding col-md-7">
+      <mat-card class="example-card profile-card">
+        <mat-card-header class="profile-header">
+          <mat-card-title>Register Form</mat-card-title>
         </mat-card-header>
-        <mat-card-content style="background-color: snow" >
+        <mat-card-content class="profile-content">
           <form #accountForm=ngForm (ngSubmit)="onSubmit()"  [formGroup]="accountsForm" >
-            <!--      <mat-dialog-content [hidden]="!error" style="background-color: red; color: #e5e7eb;">-->
-            <!--        {{error}}-->
-            <!--      </mat-dialog-content>-->
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Enter your First Name</mat-label>
               <input type="text" matInput  name="firstname"   formControlName="firstname"   required>
-              <!--          <mat-hint>madawa@gmail.com</mat-hint>-->
-              <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
             </mat-form-field>
             &nbsp;
 
             <mat-form-field appearance="outline">
               <mat-label>Enter your Last Name</mat-label>
               <input type="text" matInput  name="lastname"  formControlName="lastname"  required>
-              <!--          <mat-hint>madawa@gmail.com</mat-hint>-->
-              <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
             </mat-form-field>
             <br>
             <mat-form-field appearance="outline">
               <mat-label>Enter your Age</mat-label>
               <input type="text" matInput  name="age" formControlName="age" required>
-              <!--          <mat-hint>madawa@gmail.com</mat-hint>-->
-              <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
             </mat-form-field>
             &nbsp;
             <mat-form-field appearance="outline">
               <mat-label>Enter your Phone Number</mat-label>
               <input type="text" matInput  name="number"   formControlName="number" required>
-              <!--          <mat-hint>madawa@gmail.com</mat-hint>-->
-              <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
             </mat-form-field>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Enter your Address</mat-label>
               <input type="text" matInput  name="address"  formControlName="address" required>
-              <!--          <mat-hint>madawa@gmail.com</mat-hint>-->
-              <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
             </mat-form-field>
             &nbsp;
             <mat-form-field appearance="outline">
               <mat-label>Enter your Nic</mat-label>
               <input type="text" matInput  name="nic" formControlName="nic" required>
-              <!--          <mat-hint>madawa@gmail.com</mat-hint>-->
-              <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
             </mat-form-field>
 
             <br>
             <mat-form-field appearance="outline">
               <mat-label>Enter your Email</mat-label>
               <input type="email" matInput  name="email" formControlName="email"  required>
-              <!--          <mat-hint>madawa@gmail.com</mat-hint>-->
-              <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
             </mat-form-field>&nbsp;
-<!--            <mat-form-field appearance="outline" class="example-form-field">-->
-<!--              <mat-label> Item Image</mat-label>-->
-<!--              <ngx-mat-file-input (change)="onChange($event)"-->
-<!--                                  name="image" [(ngModel)]="form.image" required></ngx-mat-file-input>-->
-<!--            </mat-form-field>-->
                   <div id="imgpanel" class="example-form-field">
-                    <img [src]="imageUrl">
-                    <input id="userImage" hidden="hidden" (change)="selectImage($event)" Select type="file" formControlName="image" required>
+                    <img [src]="imageUrl" alt="Profile preview">
+                    <input id="userImage" hidden="hidden" (change)="selectImage($event)" type="file" formControlName="image" required>
                     <label for="userImage" id="selectbutton">Select</label>
-                    <!--      <label id="clearbutton" (click)="clearImage()">Clear</label>-->
                   </div>
-            <mat-card-actions style="background-color: snow"  type="button" >
+            <mat-card-actions class="profile-actions" type="button">
               <button id="btnSubmit" type="submit" mat-button mat-raised-button color="primary" [disabled]="!accountForm.valid">Submit</button>&nbsp;&nbsp;&nbsp;
-              <button id="btnUpdate"mat-button mat-raised-button color="accent" type="button" [disabled]="!accountForm.valid" (click)="update()">Update</button>&nbsp;
+              <button id="btnUpdate" mat-button mat-raised-button color="accent" type="button" [disabled]="!accountForm.valid" (click)="update()">Update</button>&nbsp;
               <button id="btnDelete" mat-button mat-raised-button color="warn" type="button" [disabled]="!accountForm.valid" (click)="delete()">Delete</button>&nbsp;
-              <button mat-button mat-raised-button color="info"   (click)="clearForm()" style="float: right">Clear</button>
+              <button mat-button mat-raised-button color="accent" (click)="clearForm()" style="float: right">Clear</button>
             </mat-card-actions>
           </form>
         </mat-card-content>
       </mat-card>
+
+      <div *ngIf="isSystemUser" style="margin-top: 20px;">
+        <app-item-form></app-item-form>
+        <app-item-table></app-item-table>
+      </div>
 
     </div>
 

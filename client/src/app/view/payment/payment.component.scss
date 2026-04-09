@@ -1,0 +1,150 @@
+.payment-card {
+  width: min(100%, 1000px);
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.payment-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.payment-total {
+  min-width: 180px;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  text-align: right;
+}
+
+.payment-total span,
+.order-summary span {
+  display: block;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1rem;
+}
+
+.payment-panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.payment-panel h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.9rem;
+}
+
+.payment-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-weight: 600;
+  color: #334155;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px #dbeafe;
+}
+
+.method-list {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.method-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.order-summary {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.order-summary div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.grand-total {
+  padding-top: 0.6rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 0;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pay-btn:hover {
+  background: #1d4ed8;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .payment-hero,
+  .payment-grid,
+  .field-row {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .payment-total {
+    text-align: left;
+  }
+}
+

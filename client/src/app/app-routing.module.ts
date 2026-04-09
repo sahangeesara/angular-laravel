@@ -7,7 +7,6 @@ import {RequestResetComponent} from "./view/password/request-reset/request-reset
 import {ResponseResetComponent} from "./view/password/response-reset/response-reset.component";
 import {LoginComponent} from "./view/login/login.component";
 import {SignupComponent} from "./view/signup/signup.component";
-import {NavbarComponent} from "./view/navbar/navbar.component";
 import {BeforeLoginService} from "./Services/before-login.service";
 import {AfterLoginService} from "./Services/after-login.service";
 import {PhoneComponent} from "./view/phone/phone.component";
@@ -17,6 +16,8 @@ import {HomeComponent} from "./view/home/home.component";
 import {AboutComponent} from "./view/about/about.component";
 import {ContactusComponent} from "./view/contactus/contactus.component";
 import {CartComponent} from "./view/cart/cart.component";
+import { PaymentComponent } from './view/payment/payment.component';
+import { ItemDetailComponent } from './view/item-detail/item-detail.component';
 import {PanelComponent} from "./admin/panel/panel.component";
 import {DashboardComponent} from "./admin/dashboard/dashboard.component";
 
@@ -71,6 +72,16 @@ const routes: Routes = [
   {
     path:'cart',
     component: CartComponent,
+    canActivate:[AfterLoginService]
+  },
+  {
+    path:'payment',
+    component: PaymentComponent,
+    canActivate:[AfterLoginService]
+  },
+  {
+    path:'item/:id',
+    component: ItemDetailComponent,
     canActivate:[AfterLoginService]
   },
   {

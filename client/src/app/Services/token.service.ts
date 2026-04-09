@@ -46,5 +46,17 @@ export class TokenService {
   loggedIn(){
     return this.isValid();
   }
+  getUserRole(): string | null {
+    const token = this.get();
+    if (token) {
+      const payload = this.payload(token);
+      // Adjust the property name below to match your backend JWT payload (e.g., 'role', 'type', etc.)
+      return payload && payload.role ? payload.role : null;
+    }
+    return null;
+  }
 
+  isSystemUser(): boolean {
+    return this.getUserRole() === 'system'; // Adjust 'system' to match your backend's value for system users
+  }
 }

@@ -15,6 +15,7 @@ use mysql_xdevapi\Schema;
 class Item extends Model
 {
     protected $connection = 'mysql_second';
+
     /**
      * The attributes that are mass assignable.
      *

@@ -1,129 +1,44 @@
+<nav class="navbar navbar-expand-lg store-navbar">
+  <div class="container-fluid navbar-shell">
+    <button mat-button routerLink="/home" class="logo-btn" aria-label="Go to home">
+      <img src="assets/logo/logo.png" alt="Online Club logo">
+      <span class="brand-text">Online Club</span>
+    </button>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <button  mat-button routerLink="/home"  class="failory-logo-image mx-auto" >
-      <!--        <mat-icon>home</mat-icon>-->
-      <img src="assets/logo/logo.png" alt="" width="40">
-    </button> &nbsp;
-    <button mat-icon-button class="example-icon custom-toggler"  (click)="toggleSideNav()" *ngIf="loggedIn && isMenuOpen"  >
+    <button mat-icon-button class="menu-btn" (click)="toggleSideNav()" *ngIf="loggedIn && isMenuOpen" aria-label="Open menu">
       <mat-icon>menu</mat-icon>
     </button>
-    <div class="collapse navbar-collapse padding " id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link pointer" aria-current="page" href="#"  *ngIf="loggedIn" routerLink="home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link pointer" aria-current="page" href="#"  *ngIf="loggedIn" routerLink="phone">Phone</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" *ngIf="loggedIn" routerLink="vehicle">Vehicle</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link pointer" href="#" *ngIf="loggedIn" routerLink="laptop">Laptop</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link pointer" href="#" *ngIf="loggedIn" routerLink="about">About</a>
-        </li>
+
+    <div class="collapse navbar-collapse nav-content" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-links">
+        <li class="nav-item"><a class="nav-link" *ngIf="loggedIn" routerLink="home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" *ngIf="loggedIn" routerLink="phone">Phone</a></li>
+        <li class="nav-item"><a class="nav-link" *ngIf="loggedIn" routerLink="vehicle">Vehicle</a></li>
+        <li class="nav-item"><a class="nav-link" *ngIf="loggedIn" routerLink="laptop">Laptop</a></li>
+        <li class="nav-item"><a class="nav-link" *ngIf="loggedIn" routerLink="about">About</a></li>
       </ul>
-      <span class="navbar-text">
-      <span class="example-spacer"></span>
-      <a mat-icon-button class="example-icon" routerLink="login" *ngIf="!loggedIn">
-        <mat-icon>login</mat-icon>
 
-      </a>
-      <a mat-icon-button class="example-icon" href="#" (click)="logout($event)"  *ngIf="loggedIn">
-        <mat-icon>logout</mat-icon>
-
-      </a>
-
-      <a mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" *ngIf="loggedIn">
-        <mat-icon>account_circle</mat-icon>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item  *ngIf="loggedIn" routerLink="home"> Home </button>
-          <button mat-menu-item  *ngIf="loggedIn" routerLink="profile"> Account Details </button>
-          <button mat-menu-item  *ngIf="loggedIn" routerLink="about"> About Us </button>
-          <button mat-menu-item  *ngIf="loggedIn" routerLink="contact"> Contact Us </button>
-          <button mat-menu-item  *ngIf="loggedIn" routerLink="#" (click)="logout($event)"> Logout </button>
-        </mat-menu>
-      </a>
-      <a mat-icon-button class="example-icon" href="#"  routerLink="cart" *ngIf="loggedIn">
-        <mat-icon>shopping_cart</mat-icon>
-
-      </a>
-
+      <span class="navbar-text nav-actions">
+        <a mat-icon-button class="example-icon" routerLink="login" *ngIf="!loggedIn" aria-label="Login">
+          <mat-icon>login</mat-icon>
+        </a>
+        <a mat-icon-button class="example-icon" href="#" (click)="logout($event)" *ngIf="loggedIn" aria-label="Logout">
+          <mat-icon>logout</mat-icon>
+        </a>
+        <a mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" *ngIf="loggedIn" aria-label="Account menu">
+          <mat-icon>account_circle</mat-icon>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="loggedIn" routerLink="home">Home</button>
+            <button mat-menu-item *ngIf="loggedIn" routerLink="profile">Account Details</button>
+            <button mat-menu-item *ngIf="loggedIn" routerLink="about">About Us</button>
+            <button mat-menu-item *ngIf="loggedIn" routerLink="contact">Contact Us</button>
+            <button mat-menu-item *ngIf="loggedIn" routerLink="#" (click)="logout($event)">Logout</button>
+          </mat-menu>
+        </a>
+        <a mat-icon-button class="example-icon" routerLink="cart" *ngIf="loggedIn" aria-label="Cart">
+          <mat-icon>shopping_cart</mat-icon>
+          <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+        </a>
       </span>
     </div>
   </div>
-</nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--  <mat-toolbar color="primary" >-->
-<!--    <mat-toolbar-row>-->
-<!--       <button  mat-button routerLink="/home" *ngIf="loggedIn" class="failory-logo-image" >-->
-<!--&lt;!&ndash;        <mat-icon>home</mat-icon>&ndash;&gt;-->
-<!--         <img src="assets/logo/logo.png" alt="" width="40">-->
-<!--      </button> &nbsp;-->
-<!--      <button mat-icon-button class="example-icon"  (click)="toggleSideNav()" *ngIf="loggedIn"  >-->
-<!--        <mat-icon>menu</mat-icon>-->
-<!--    </button>-->
-<!--      <div>-->
-<!--        <span>-->
-<!--         Online Club-->
-<!--        </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-<!--        <div class="collapse navbar-collapse" id="navbarNavDropdown">-->
-<!--        <a>-->
-<!--          <span  *ngIf="loggedIn" routerLink="phone" class="pointer"> Phone </span>&nbsp;-->
-<!--          <span *ngIf="loggedIn" routerLink="vehicle" class="pointer"> Vehicle </span>&nbsp;-->
-<!--          <span  *ngIf="loggedIn" routerLink="laptop" class="pointer"> Laptop </span>&nbsp;-->
-
-<!--        </a>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <span class="example-spacer"></span>-->
-<!--      <a mat-icon-button class="example-icon" routerLink="login" *ngIf="!loggedIn">-->
-<!--        <mat-icon>login</mat-icon>-->
-
-<!--      </a>-->
-<!--      <a mat-icon-button class="example-icon" href="#" (click)="logout($event)"  *ngIf="loggedIn">-->
-<!--        <mat-icon>logout</mat-icon>-->
-
-<!--      </a>-->
-
-<!--      <a mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" *ngIf="loggedIn">-->
-<!--        <mat-icon>account_circle</mat-icon>-->
-<!--        <mat-menu #menu="matMenu">-->
-<!--          <button mat-menu-item  *ngIf="loggedIn" routerLink="home"> Home </button>-->
-<!--          <button mat-menu-item  *ngIf="loggedIn" routerLink="profile"> Account Details </button>-->
-<!--          <button mat-menu-item  *ngIf="loggedIn" routerLink="about"> About Us </button>-->
-<!--          <button mat-menu-item  *ngIf="loggedIn" routerLink="contact"> Contact Us </button>-->
-<!--          <button mat-menu-item  *ngIf="loggedIn" routerLink="#" (click)="logout($event)"> Logout </button>-->
-<!--        </mat-menu>-->
-<!--      </a>-->
-<!--      <a mat-icon-button class="example-icon" href="#"  routerLink="cart" *ngIf="loggedIn">-->
-<!--        <mat-icon>shopping_cart</mat-icon>-->
-
-<!--      </a>-->
-
-<!--    </mat-toolbar-row>-->
-<!--  </mat-toolbar>-->
-<!--[matMenuTriggerFor]="menu"-->

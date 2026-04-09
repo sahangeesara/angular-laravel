@@ -4,6 +4,7 @@ import {Item} from "../../entities/Item";
 import {JarwisService} from "../../Services/jarwis.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogItemComponent} from "../../view/dialog-item/dialog-item.component";
+import { TokenService } from '../../Services/token.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class PanelComponent  implements OnInit{
   imageUrl?: string = 'assets/default.png';
   file?: any;
   id?: any = null;
+  isSystemUser: boolean = false;
   itemsForm = new FormGroup({
     itemName: new FormControl(
        "", [Validators.required,]
@@ -53,11 +55,13 @@ export class PanelComponent  implements OnInit{
   }
 
   constructor(private Jarvis: JarwisService,
-               private dialog: MatDialog
+              private dialog: MatDialog,
+              private tokenService: TokenService
   ) {
   }
   ngOnInit(): void {
-   this.loadALL();
+    this.isSystemUser = this.tokenService.isSystemUser();
+    this.loadALL();
 
   }
 

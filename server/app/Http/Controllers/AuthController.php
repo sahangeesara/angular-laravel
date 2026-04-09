@@ -6,8 +6,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SignUpRequest;
 
 use App\Models\User;
-use Auth;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 
 class AuthController extends Controller
@@ -17,8 +17,6 @@ class AuthController extends Controller
      *
      * @return void
      */
-//    use Auth;
-
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['login','signup']]);
@@ -33,7 +31,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Email or Password does \'t exit'], 401);
         }
 
@@ -41,8 +39,17 @@ class AuthController extends Controller
     }
     public function signup(SignUpRequest $request)
     {
-    User::create($request->all());
-    return $this->login($request);
+        $validated = $request->validated();
+
+        User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => $validated['password'],
+            'is_customer' => $validated['is_customer'] ?? true,
+            'customer_type' => $validated['customer_type'] ?? 'regular',
+        ]);
+
+        return $this->login();
     }
 
     /**
@@ -52,7 +59,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(JWTAuth::user());
     }
 
     /**
@@ -74,7 +81,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(JWTAuth::refresh());
     }
 
     /**
@@ -86,11 +93,19 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        $user = JWTAuth::user();
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user'=>auth()->user()->name
+            'expires_in' => config('jwt.ttl', 60) * 60,
+            'user' => [
+                'id' => $user?->id,
+                'name' => $user?->name,
+                'email' => $user?->email,
+                'is_customer' => (bool) ($user?->is_customer ?? false),
+                'customer_type' => $user?->customer_type,
+            ],
         ]);
     }
 }

@@ -26,17 +26,7 @@ export class AppComponent implements OnInit{
     this.router.navigateByUrl('/login');
   }
   ngOnInit(): void {
-    this.auth.authStatus.subscribe(value => this.loggedIn =value);
-    // @ts-ignore
-    this.navService.getSideNavState().subscribe((state: boolean) => {
-      this.isSideNavOpen = state;
-      event?.preventDefault()
-
-    });
+    this.auth.authStatus.subscribe(value => this.loggedIn = value);
+    this.isSideNavOpen = this.navService.getSideNavState();
   }
-
-
-
-
-
 }

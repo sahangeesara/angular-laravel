@@ -1,242 +1,60 @@
-.img{
-  width: 100%;
-  height: 600px;
-}
-.padding{
-  padding-top: 30px;
-  padding-bottom: 50px;
-}
-
-.padding2{
-  padding-bottom: 45px;
-}
-
-.card {
-  position: relative;
-  width: 15.875em;
-  height: 18.5em;
-  box-shadow: -1px 2px 3px #bebebe, -3px -3px 10px #ffffff;
-  cursor: pointer;
-  transition: all 120ms;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  padding: 0.5em;
-  padding-bottom: 3.4em;
-}
-.card2 {
-  position: relative;
-  width: 13.875em;
-  height: 14.5em;
-  box-shadow: -1px 2px 3px #bebebe, -3px -3px 10px #ffffff;
-  cursor: pointer;
-  transition: all 120ms;
-  display: flex;
-  align-items: center;
-  //justify-content: center;
-  background: #fff;
-  padding: 0.5em;
-  padding-bottom: 3.4em;
-}
-
-.card::after {
-  content: "Add to Cart";
-  padding-top: 1.25em;
-  padding-left: 1.25em;
-  position: absolute;
-  left: 0;
-  bottom: -60px;
-  background: #00AC7C;
-  color: #fff;
-  height: 2.5em;
-  width: 100%;
-  transition: all 80ms;
-  font-weight: 600;
-  text-transform: uppercase;
-  opacity: 0;
-}
-
-
-.card .title {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.9em;
-  position: absolute;
-  left: 0.625em;
-  bottom: 1.875em;
-  font-weight: 400;
-  color: #000;
-}
-
-.card .price {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 0.9em;
-  position: absolute;
-  left: 0.625em;
-  bottom: 0.625em;
-  color: #000;
-}
-
-.card:hover::after {
-  bottom: 0;
-  opacity: 1;
-}
-
-.card:active {
-  transform: scale(0.98);
-}
-
-.card:active::after {
-  content: "Added !";
-  height: 3.125em;
-}
-
-.text {
-  max-width: 55px;
-}
-
-.image {
-  background: rgb(255, 186, 186);
-  width: 100%;
-  height: 100%;
+.home-intro {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.25rem;
   display: grid;
-  place-items: center;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1rem;
+  align-items: center;
+}
 
-}
-img{
-  width: 100px;
-  height: 100px;
-}
-.img2{
-  width: 100%;
-  height: 600px;
-}
 .demo-inline-calendar-card {
-  width: 300px;
+  width: min(100%, 320px);
+  justify-self: end;
 }
 
-@media (max-width: 992px){
-  .card{
-    width: 100%;
-    //width: max-content;
-    height: 16.5em;
-  }
-  .img2{
-    width: 500%;
-    height: 300px;
-  }
-  img{
-    width: 100px;
-    height: 120px;
-  }
+.card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
 }
-@media (max-width: 767px){
-  .card{
-    width: 100%;
-    height: 20.5em;
-    margin-top:50px ;
-    margin-right: 40%;
 
-  }
-  .img2{
-    width: 80%;
-    height: 300px;
-  }
-  img{
-    width: 130px;
-    height: 200px;
-  }
-  .padding{
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 20px;
-  }
+.preview-btn,
+.add-to-cart-quick {
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  border: 0;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
-@media (max-width: 649px){
-  .padding{
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 20px;
-  }
+
+.preview-btn {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
 }
-@media (max-width: 575px){
-  .card{
-    width: 80%;
-    height: 28.5em;
-    margin-top:50px ;
-    margin-right: 50%;
-    margin-left: 30px;
-  }
-  .img2{
-    width: 80%;
-    height: 300px;
+
+.add-to-cart-quick {
+  background: #10b981 !important;
+  color: #fff !important;
+  border: 2px solid #059669 !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.08) !important;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.add-to-cart-quick:hover {
+  background: #059669 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.16) !important;
+}
+
+@media (max-width: 920px) {
+  .home-intro {
+    grid-template-columns: 1fr;
   }
 
-  img{
-    width: 100px;
-    height: 200px;
-  }
-  .padding{
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 20px;
-  }
-}
-@media (max-width: 470px){
-  .padding{
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 0;
-    margin-left: 13px;
-
-  }
-  img{
-    width: 100px;
-    height: 200px;
-  }
-}
-@media (max-width: 440px){
-  .padding{
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 13px;
-  }
-  img{
-    width: 100px;
-    height: 200px;
-  }
-}
-@media (max-width: 388px){
-  .padding{
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 13px;
-  }
-  img{
-    width: 100px;
-    height: 200px;
-  }
-}
-@media (max-width: 350px){
-  .padding{
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 13px;
-  }
-  img{
-    width: 100px;
-    height: 200px;
+  .demo-inline-calendar-card {
+    justify-self: start;
   }
 }

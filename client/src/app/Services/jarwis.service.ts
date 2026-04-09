@@ -57,7 +57,10 @@ export class JarwisService {
 
   deleteData(data: any){
     return this.http.delete(`${this.besUrl}/delete`,data);
-
+  }
+  // For image preview to work with existing images, the backend should return a full image URL (e.g., http://localhost:8000/storage/...) in the 'image_url' property.
+  getSystemByEmail(email: string) {
+    return this.http.get<any>(`http://localhost:8000/api/system/by-email/${email}`);
   }
   // getData(data: any){
   //   return this.http.get(`${this.besUrl}/details`,data);

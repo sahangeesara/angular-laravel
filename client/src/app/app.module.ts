@@ -44,6 +44,8 @@ import { PanelComponent } from './admin/panel/panel.component';
 import { DialogComponent } from './view/dialog/dialog.component';
 import {DialogItemComponent} from "./view/dialog-item/dialog-item.component";
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ItemFormComponent } from './admin/item-form/item-form.component';
+import { ItemTableComponent } from './admin/item-table/item-table.component';
 
 
 
@@ -70,7 +72,9 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
         PanelComponent,
         DialogComponent,
         DialogItemComponent,
-        DashboardComponent
+        DashboardComponent,
+        ItemFormComponent,
+        ItemTableComponent
 
     ],
   imports: [

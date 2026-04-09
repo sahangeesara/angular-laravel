@@ -1,92 +1,32 @@
-<div id="carouselExampleControls" class="carousel slide col-md" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active  col-md">
-      <img src="assets/vehicle/v2.jpeg" class="d-block w-100 img2" alt="First slide">
+<div class="page-wrap store-page section-space">
+  <div id="carouselExampleControls" class="carousel slide store-hero" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-inner">
+      <div *ngFor="let img of sliderImages; let i = index" class="carousel-item" [class.active]="i === 0">
+        <img [src]="img" alt="Slider image">
+      </div>
     </div>
-    <div class="carousel-item  col-md">
-      <img src="assets/vehicle/v3.jpg" class="d-block w-100 img2" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/vehicle/v4.jpg" class="d-block w-100 img2" alt="Third slide">
-    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <button class="carousel-control-prev  col-md" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon  col-md" aria-hidden="true"></span>
-    <span class="visually-hidden  col-md">Previous</span>
-  </button>
-  <button class="carousel-control-next  col-md" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon  col-md" aria-hidden="true"></span>
-    <span class="visually-hidden  col-md">Next</span>
-  </button>
-</div>
 
+  <h1 class="page-title">Shop Vehicles</h1>
+  <p class="page-subtitle section-intro">Choose from luxury sedans, SUVs, and performance cars.</p>
 
-<div class="container">
-  <div class="row padding">
-    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-      <div class="card">
-        <div class="image"><img src="assets/vehicle/bmw1.jpg"></div>
-        <span class="title"> bmw i8 (2018)</span>
-        <span class="price">Rs.30,000,000.00</span>
+  <div class="store-grid">
+    <article class="store-card" *ngFor="let vehicle of vehicles">
+      <div class="store-card-image"><img [src]="vehicle.image" [alt]="vehicle.itemname"></div>
+      <span class="store-card-title">{{ vehicle.itemname }}</span>
+      <span class="store-card-price">Rs.{{ vehicle.itemprice | number }}</span>
+      <div class="card-actions">
+        <button routerLink="/item/{{vehicle.id}}" class="preview-btn">Preview</button>
+        <button type="button" class="add-to-cart-quick" [disabled]="!vehicle.id" (click)="addToCartQuick(vehicle.id)">Add to Cart</button>
       </div>
-    </div>
-
-    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-      <div class="card ms-md-3 my-xs-5">
-        <div class="image"><img src="assets/vehicle/bmw2.jpg"></div>
-        <span class="title">BMW i3 (2023)</span>
-        <span class="price">Rs.16,943,500.00</span>
-      </div>
-    </div>
-
-    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-      <div class="card ms-md-3 my-xs-5">
-        <div class="image"><img src="assets/vehicle/bmw3.jpg"></div>
-        <span class="title">GALLERY:BMW 740 Sport (2021)</span>
-        <span class="price">Rs.18,203,000.00</span>
-      </div>
-    </div>
-
-    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-      <div class="card ms-md-1 my-xs-5">
-        <div class="image"><img src="assets/vehicle/bmw4.jpg"></div>
-        <span class="title">BMW 740Le (2020)</span>
-        <span class="price">Rs.41,625,000.00</span>
-      </div>
-    </div>
-
-    <div class="row padding">
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-       <div class="card  my-xs-5">
-             <div class="image"><img src="assets/vehicle/nisan1.jpeg"></div>
-                 <span class="title">Nissan GT-R Sports Car(2024)</span>
-                 <span class="price">Rs.5,90,000,000.00</span>
-       </div>
-
-        </div>
-
-         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-            <div class="card ms-md-3 my-xs-5">
-              <div class="image"><img src="assets/vehicle/Toyatav8.png"></div>
-                 <span class="title">ToyotaV8(2019)</span>
-                 <span class="price">Rs.11,000,000.00</span>
-              </div>
-           </div>
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-        <div class="card ms-md-3 my-xs-5">
-          <div class="image"><img src="assets/vehicle/defender1.jpg"></div>
-          <span class="title">Land Rover Defender(2018)</span>
-          <span class="price">Rs.14,000,000.00</span>
-        </div>
-      </div>
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6">
-        <div class="card ms-md-3 my-xs-5">
-          <div class="image"><img src="assets/vehicle/landRover.jpeg"></div>
-          <span class="title">Land Rover Defender (2020)</span>
-          <span class="price">Rs.2,490,000.00</span>
-        </div>
-      </div>
-    </div>
+    </article>
   </div>
 </div>
-

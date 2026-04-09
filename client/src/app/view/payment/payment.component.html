@@ -1,0 +1,45 @@
+<div class="simple-page">
+  <div class="page-wrap">
+    <section class="surface-card payment-card">
+      <div class="payment-hero">
+        <div>
+          <h1 class="page-title">Payment</h1>
+          <p class="page-subtitle">Complete your purchase with a simple, secure checkout flow.</p>
+        </div>
+        <div class="payment-total">
+          <span>Total</span>
+          <strong>Rs. {{ grandTotal | number }}</strong>
+        </div>
+      </div>
+
+      <div class="payment-grid">
+        <div class="payment-panel">
+          <h2>Billing Details</h2>
+          <div class="payment-form">
+            <div class="field-row">
+              <div class="field"><label for="fullName">Full Name</label><input id="fullName" type="text" placeholder="Enter your name"></div>
+              <div class="field"><label for="paymentEmail">Email</label><input id="paymentEmail" type="email" placeholder="Enter your email"></div>
+            </div>
+            <div class="field"><label for="address">Address</label><input id="address" type="text" placeholder="Street address"></div>
+            <div class="field-row">
+              <div class="field"><label for="city">City</label><input id="city" type="text" placeholder="City"></div>
+              <div class="field"><label for="postalCode">Postal Code</label><input id="postalCode" type="text" placeholder="Postal code"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-panel summary-panel">
+          <h2>Order Summary</h2>
+          <div class="order-summary">
+            <div><span>Subtotal</span><strong>Rs. {{ subtotal | number }}</strong></div>
+            <div><span>Shipping</span><strong>Rs. {{ shipping | number }}</strong></div>
+            <div class="grand-total"><span>Grand Total</span><strong>Rs. {{ grandTotal | number }}</strong></div>
+          </div>
+          <button type="button" class="pay-btn" (click)="payNow()">Pay Now</button>
+          <a routerLink="/cart" class="back-link">Back to cart</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+

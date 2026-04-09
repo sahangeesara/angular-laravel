@@ -1,51 +1,40 @@
- <div class="container">
-   <div class="row">
-     <div class="col-md-4"> </div>
+<div class="auth-page">
+  <div class="page-wrap">
+    <mat-card class="example-card auth-card">
+      <mat-card-header class="auth-header">
+        <div mat-card-avatar></div>
+        <mat-card-title class="title">Login Here</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #loginForm=ngForm (ngSubmit)="onSubmit()" class="form">
+          <mat-dialog-content [hidden]="!error" class="error-box">{{error}}</mat-dialog-content>
 
-     <div class="col-md-4 form-container" style="padding-top: 150px">
-       <mat-card class="example-card">
-         <mat-card-header  style="background-color: mediumaquamarine">
-           <div mat-card-avatar></div>
-           <mat-card-title style="margin-left: 0px" class="title"> Login Here </mat-card-title>
-         </mat-card-header>
-         <mat-card-content style="background-color: snow">
-           <br>
-           <form #loginForm=ngForm (ngSubmit)="onSubmit()"  class="form">
-             <mat-dialog-content [hidden]="!error" style="background-color: red; color: #e5e7eb;">
-               {{error}}
-             </mat-dialog-content>
-             <br> <br>
+          <div class="example-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Enter your email</mat-label>
+              <input type="email" matInput name="email" [(ngModel)]="form.email" required>
+              <mat-hint>madawa@gmail.com</mat-hint>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
 
-             <div class="example-container">
-               <mat-form-field appearance="outline">
-                 <mat-label>Enter your email</mat-label>
-                 <input type="email" matInput  name="email"  [(ngModel)]="form.email"  required>
-                 <mat-hint>madawa@gmail.com</mat-hint>
-                 <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-               </mat-form-field>
-             </div>
-             <br>
-             <div class="example-container">
-               <mat-form-field appearance="outline">
-                 <mat-label>Enter your password</mat-label>
-                 <input matInput [type]="hide ? 'password' : 'text'" name="=password" [(ngModel)]="form.password" required>
-                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                 </button>
-               </mat-form-field>
-             </div>
-             <mat-card-actions>
-               <button mat-button mat-raised-button color="primary" [disabled]="!loginForm.valid" class="sign">Sing in</button>&nbsp;&nbsp;&nbsp;&nbsp;
-               <button mat-button mat-raised-button color="info"  type="button" routerLink="/signup"  style="float: right" class="sign">Sing up</button>
-             </mat-card-actions>
-             <small style="float: right">
-               <a routerLink="/request-password-reset" class="forgot">Reset Password</a>
-             </small>
-           </form>
-         </mat-card-content>
-       </mat-card>
+          <div class="example-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" name="=password" [(ngModel)]="form.password" required>
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
 
-     </div>
-     <div class="col-md-4"> </div>
-    </div>
- </div>
+          <mat-card-actions class="action-row">
+            <button mat-button mat-raised-button color="primary" [disabled]="!loginForm.valid" class="sign">Sign in</button>
+            <button mat-button mat-raised-button color="accent" type="button" routerLink="/signup" class="sign">Sign up</button>
+          </mat-card-actions>
+          <small class="forgot-row"><a routerLink="/request-password-reset" class="forgot">Reset Password</a></small>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

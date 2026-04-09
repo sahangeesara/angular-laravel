@@ -1,0 +1,24 @@
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="item-form">
+  <div>
+    <label>Item Name</label>
+    <input formControlName="itemname" type="text" required />
+  </div>
+  <div>
+    <label>Item Price</label>
+    <input formControlName="itemprice" type="number" required />
+  </div>
+  <div>
+    <label>Item Code</label>
+    <input formControlName="itemcode" type="text" required />
+  </div>
+  <div>
+    <label>Description</label>
+    <textarea formControlName="description"></textarea>
+  </div>
+  <div>
+    <label>Image</label>
+    <input type="file" (change)="onFileChange($event)" />
+  </div>
+  <button type="submit">Add Item</button>
+</form>
+

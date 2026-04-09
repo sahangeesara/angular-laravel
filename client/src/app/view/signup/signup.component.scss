@@ -1,26 +1,44 @@
-@media (max-width: 1200px) {
-  .example-card {
-    width: 500px;
-  }
+.auth-card {
+  width: min(100%, 520px);
+  margin: 0 auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  overflow: hidden;
 }
-@media (max-width: 992px) {
-  .example-card {
-    width: 400px;
-  }
+
+.auth-header {
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+  color: #0f172a;
+  padding: 0.9rem 1rem;
 }
-@media (max-width: 767px) {
-  .example-card {
-    width: 300px;
-  }
+
+.form-shell {
+  padding: 1rem;
 }
-@media (max-width: 653px) {
-  .example-card {
-    width: 300px;
-  }
+
+.example-container,
+mat-form-field {
+  width: 100%;
 }
-@media (max-width: 575px){
-  .example-card {
-    width: 400px;
+
+.error-box {
+  margin: 0.25rem 0 0.75rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-top: 0.45rem;
+}
+
+@media (max-width: 575px) {
+  .action-row {
+    flex-direction: column;
   }
 }
 

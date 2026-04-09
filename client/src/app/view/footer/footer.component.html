@@ -1,32 +1,40 @@
-<div class="container-footer w-container">
-  <div class="w-row">
-    <div class="footer-column w-clearfix w-col w-col-4">
-      <h3 class="footer-failory-name">Online club</h3>
-      <p class="footer-description-failory">Lorem ipsum dolor sit amet.<br></p>
-    </div>
-    <div class="footer-column w-col w-col-8">
-      <div class="w-row">
-        <div class="w-col w-col-8">
-          <div class="w-row">
-            <div class="w-col w-col-7 w-col-small-6 w-col-tiny-7">
-              <h3 class="footer-titles">Search</h3>
-              <p class="footer-links"><a href="" routerLink="phone"><span class="footer-link">Phone<br></span></a><a href="" routerLink="vehicle"><span class="footer-link">Vehicle<br></span></a><a href="" routerLink="laptop"><span class="footer-link"> laptop</span></a><span><br></span></p>
-            </div>
-            <div class="w-col w-col-5 w-col-small-6 w-col-tiny-5">
-              <h3 class="footer-titles">Other</h3>
-              <p class="footer-links"><a href="" routerLink="contact"><span class="footer-link">Contact Us<br></span></a><a href="" routerLink="about"><span class="footer-link">About Us<br></span></a><a href=""><span class="footer-link"></span></a> <a  routerLink="#" (click)="logout($event)"> <span class="footer-link">Logout</span>  </a></p>
-            </div>
-          </div>
-        </div>
-        <div class="column-center-mobile w-col w-col-4">
-          <h3 class="footer-titles">Follow Us!</h3><a href="" target="_blank" class="footer-social-network-icons w-inline-block"><img src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dbf0a2f2b67e3b3ba079c_Twitter%20Icon.svg" width="20" alt="Twitter icon"></a><a href="" target="_blank" class="footer-social-network-icons w-inline-block"><img src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dbfe70fcf5a0514c5b1da_Instagram%20Icon.svg" width="20" alt="Instagram icon"></a><a href="" target="_blank" class="footer-social-network-icons w-inline-block"><img src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dbe42e1e6034fdaba46f6_Facebook%20Icon.svg" width="20" alt="Facebook Icon"></a><a href="" target="_blank" class="footer-social-network-icons w-inline-block"><img src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dc0002f2b676eb4ba0869_LinkedIn%20Icon.svg" width="20" alt="LinkedIn Icon"></a><a href="" target="_blank" class="footer-social-network-icons w-inline-block"><img src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dc0112f2b6739c9ba0871_Pinterest%20Icon.svg" width="20" alt="Pinterest Icon" class=""></a>
-          <p class="footer-description">Email me at: <a href=""><strong class="link-email-footer">onlinestore@gmail.com</strong></a><br></p>
-          <p class="footer-description">Contact Number at: <a href=""><strong>0713966621</strong></a><br></p>
-        </div>
+<footer class="store-footer">
+  <div class="store-footer__wrap">
+    <section>
+      <h3 class="footer-failory-name">Online Club</h3>
+      <p class="footer-description-failory">A simple, fast online store for phones, vehicles, and laptops.</p>
+    </section>
+
+    <section>
+      <h3 class="footer-titles">Shop</h3>
+      <p class="footer-links">
+        <a routerLink="phone" class="footer-link">Phone</a>
+        <a routerLink="vehicle" class="footer-link">Vehicle</a>
+        <a routerLink="laptop" class="footer-link">Laptop</a>
+      </p>
+    </section>
+
+    <section>
+      <h3 class="footer-titles">Support</h3>
+      <p class="footer-links">
+        <a routerLink="contact" class="footer-link">Contact Us</a>
+        <a routerLink="about" class="footer-link">About Us</a>
+        <a routerLink="#" (click)="logout($event)" class="footer-link">Logout</a>
+      </p>
+    </section>
+
+    <section>
+      <h3 class="footer-titles">Follow Us</h3>
+      <div class="footer-social-links">
+        <a href="#" class="footer-social-network-icons" aria-label="Twitter"><img src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dbf0a2f2b67e3b3ba079c_Twitter%20Icon.svg" width="20" alt="Twitter icon"></a>
+        <a href="#" class="footer-social-network-icons" aria-label="Instagram"><img src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dbfe70fcf5a0514c5b1da_Instagram%20Icon.svg" width="20" alt="Instagram icon"></a>
+        <a href="#" class="footer-social-network-icons" aria-label="Facebook"><img src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dbe42e1e6034fdaba46f6_Facebook%20Icon.svg" width="20" alt="Facebook icon"></a>
       </div>
-    </div>
+      <p class="footer-description">Email: <strong class="link-email-footer">onlinestore@gmail.com</strong></p>
+      <p class="footer-description">Contact: <strong>0713966621</strong></p>
+    </section>
   </div>
-</div>
+</footer>
 
 
 <!--<img src="assets/logo/logo.png" alt="" width="40" class="failory-logo-image">-->

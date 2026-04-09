@@ -1,59 +1,71 @@
-.example-container mat-form-field + mat-form-field {
-  margin-left: 8px;
-}
-.padding{
-padding-top: 30px;
-
-}
-.example-card {
-  max-width: 600px;
-  max-height: 2200px;
- }
-.example-card2 {
-  max-width: 400px;
-  max-height: 2200px;
-}
-form{
-  padding-top: 10px;
-}
-.mat-mdc-form-field{
-  max-width: 600px;
-}
-@media (max-width: 1200px) {
-  .example-card {
-    width: 500px;
-   }
-}
-@media (max-width: 992px) {
-  .example-card {
-    width: 350px;
-    //padding-top:80PX ;
-  }
-}
-@media (max-width: 767px) {
-  .example-card {
-    width: 500px;
-    height: 300px;
-  }
-}
-@media (max-width: 653px) {
-  .example-card {
-    width: 400px;
-  }
-}
-@media (max-width: 575px){
-  .example-card {
-    width: 300px;
-  }
-}
-#imgpanel{
-  height:100px;
-  margin-bottom: 30px;
+.profile-grid {
+  row-gap: 1rem;
 }
 
-#imgpanel img{
+.padding {
+  padding-top: 0;
+}
+
+.profile-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.profile-header {
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+  color: #0f172a;
+  padding: 0.8rem 1rem;
+}
+
+.profile-content {
+  padding: 0.9rem 1rem;
+}
+
+form {
+  padding-top: 0.4rem;
+}
+
+.mat-mdc-form-field {
+  width: min(100%, 290px);
+}
+
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+#imgpanel {
+  min-height: 110px;
+  margin: 0.5rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#imgpanel img {
   height: 100px;
   width: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+}
+
+#selectbutton {
+  display: inline-block;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .mat-mdc-form-field {
+    width: 100%;
+  }
 }
 
 

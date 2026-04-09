@@ -1,22 +1,20 @@
 <app-navbar></app-navbar>
-<mat-sidenav-container class="justify-content-center">
-  <mat-sidenav  mode="over"  [opened]="navService.getSideNavState()" class="bg-light">
-<!--    <div class="row w-100 justify-content-end">-->
-<!--      <button (click)="navService.setSideNavState()" color="warn" mat-mini-fab>-->
-<!--        <mat-icon>close</mat-icon>-->
-<!--      </button>-->
-<!--    </div>-->
-    <div class="px-md-3 ">
+<mat-sidenav-container class="app-shell justify-content-center">
+  <mat-sidenav mode="over" [opened]="navService.getSideNavState()" class="app-sidenav bg-light">
+    <div class="px-md-3 py-2">
       <mat-nav-list>
-            <mat-list-item routerLink="phone">
-              <mat-icon>smartphone</mat-icon>
-            </mat-list-item>
-            <mat-list-item routerLink="vehicle">
-              <mat-icon> directions_car</mat-icon>
-            </mat-list-item>
-            <mat-list-item routerLink="laptop">
-              <mat-icon>laptop</mat-icon>
-            </mat-list-item>
+        <mat-list-item routerLink="phone">
+          <mat-icon>smartphone</mat-icon>
+          <span class="menu-label">Phone</span>
+        </mat-list-item>
+        <mat-list-item routerLink="vehicle">
+          <mat-icon>directions_car</mat-icon>
+          <span class="menu-label">Vehicle</span>
+        </mat-list-item>
+        <mat-list-item routerLink="laptop">
+          <mat-icon>laptop</mat-icon>
+          <span class="menu-label">Laptop</span>
+        </mat-list-item>
       </mat-nav-list>
 
       <span class="navbar-text">
@@ -50,7 +48,7 @@
 
     </div>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="app-content">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -13,7 +13,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'user';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +24,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'is_customer',
+        'customer_type',
     ];
 
     /**
@@ -43,7 +45,18 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_customer' => 'boolean',
     ];
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
     public function getJWTIdentifier()
     {
@@ -57,7 +70,10 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'is_customer' => (bool) $this->is_customer,
+            'customer_type' => $this->customer_type,
+        ];
     }
     public function setPasswordAttribute($value){
         $this->attributes['password'] = bcrypt($value);

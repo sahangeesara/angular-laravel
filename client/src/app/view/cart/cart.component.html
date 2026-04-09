@@ -1,1 +1,50 @@
-<p>cart works!</p>
+<div class="simple-page">
+  <div class="page-wrap">
+    <section class="surface-card cart-card">
+      <div class="cart-header">
+        <div>
+          <h1 class="page-title">Your Cart</h1>
+          <p class="page-subtitle">Review the items before moving to payment.</p>
+        </div>
+        <a routerLink="/payment" class="checkout-pill">Checkout</a>
+      </div>
+
+      <div *ngIf="loading" class="cart-loading">Loading cart...</div>
+      <div *ngIf="error" class="cart-error">{{ error }}</div>
+
+      <div class="cart-layout" *ngIf="cart && !loading">
+        <div class="cart-items">
+          <div *ngIf="cart.items.length === 0" class="cart-empty">
+            <img src="assets/empty-cart.svg" alt="Empty cart" class="cart-empty-img">
+            <p>Your cart is empty. Start shopping!</p>
+          </div>
+          <article class="cart-item fade-in" *ngFor="let cartItem of cart.items">
+            <img [src]="cartItem.item?.image" [alt]="cartItem.item?.itemname">
+            <div class="cart-item-info">
+              <h2>{{ cartItem.item?.itemname }}</h2>
+              <p>{{ cartItem.item?.description }}</p>
+              <p>Quantity: {{ cartItem.quantity }}</p>
+            </div>
+            <div class="cart-item-price">Rs.{{ cartItem.unit_price | number }}</div>
+            <button class="remove-btn" (click)="removeFromCart(cartItem.item_id)">Remove</button>
+          </article>
+
+          <div class="cart-actions" *ngIf="cart.items.length > 0">
+            <a routerLink="/phone" class="cart-link">Add more phones</a>
+            <a routerLink="/laptop" class="cart-link">Add more laptops</a>
+            <a routerLink="/vehicle" class="cart-link">Browse vehicles</a>
+            <button (click)="clearCart()" class="cart-link danger">Clear Cart</button>
+          </div>
+        </div>
+
+        <aside class="cart-summary">
+          <h2>Order Summary</h2>
+          <div class="summary-row"><span>Subtotal</span><strong>Rs.{{ getTotal() | number }}</strong></div>
+          <div class="summary-row"><span>Shipping</span><strong>Rs.15,000.00</strong></div>
+          <div class="summary-row total"><span>Total</span><strong>Rs.{{ (getTotal() + 15000) | number }}</strong></div>
+          <a routerLink="/payment" class="summary-checkout">Proceed to payment</a>
+        </aside>
+      </div>
+    </section>
+  </div>
+</div>

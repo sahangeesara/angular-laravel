@@ -1,51 +1,55 @@
-.colorful-form {
-  max-width: 400px;
+.contact-card {
+  width: min(100%, 640px);
   margin: 0 auto;
-  padding: 20px;
-  background-color: #cdffc7;
-  border-radius: 10px;
+  padding: 1.4rem;
+}
+
+.colorful-form {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.9rem;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  display: grid;
+  gap: 0.35rem;
 }
 
 .form-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #000000;
+  font-weight: 600;
+  color: #334155;
 }
 
 .form-input {
   width: 100%;
-  padding: 10px;
-  border: none;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #d1d5db;
   background-color: #fff;
-  color: #333;
-  border-radius: 5px;
+  color: #111827;
+  border-radius: 10px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px #dbeafe;
 }
 
 textarea.form-input {
-  height: 100px;
+  min-height: 130px;
+  resize: vertical;
 }
 
 .form-button {
-  display: block;
   width: 100%;
-  padding: 10px;
-  background-color: #ff6f69;
+  padding: 0.7rem;
+  background: #2563eb;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .form-button:hover {
-  background-color: #ff5f59;
-}
-.padding{
-  padding-top: 40px;
-  padding-bottom: 50px;
+  background: #1d4ed8;
 }
