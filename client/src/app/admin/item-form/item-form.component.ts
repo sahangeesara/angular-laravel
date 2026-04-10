@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class ItemFormComponent {
   itemForm: FormGroup;
+  selectedFile: File | null = null;
 
   constructor(private fb: FormBuilder, private itemApi: ItemApiService) {
     this.itemForm = this.fb.group({
@@ -20,8 +21,18 @@ export class ItemFormComponent {
     });
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    } else {
+      this.selectedFile = null;
+    }
+  }
+
   onClear() {
     this.itemForm.reset();
+    this.selectedFile = null;
   }
 
   onSubmit() {
@@ -34,10 +45,14 @@ export class ItemFormComponent {
     formData.append('itemprice', this.itemForm.value.itemprice);
     formData.append('itemcode', this.itemForm.value.itemcode);
     formData.append('description', this.itemForm.value.description);
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
     this.itemApi.addItem(formData).subscribe({
       next: () => {
         Swal.fire('Success', 'Item added successfully!', 'success');
         this.itemForm.reset();
+        this.selectedFile = null;
       },
       error: () => {
         Swal.fire('Error', 'Failed to add item.', 'error');
